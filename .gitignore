@@ -38,9 +38,9 @@ hs_err_pid*
 
 ### VS Code ###
 .vscode/
-
 bin/
 log/
 logs/
 .gradle
 .idea
+.out
