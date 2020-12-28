@@ -61,11 +61,11 @@ public class Solution0036 {
     private static boolean isValidSudoku(char[][] board) {
         for (int i = 0; i < board.length; i++) {
             // 横
-            if (checkRepeat(board[i])) {
+            if (isRepeat(board[i])) {
                 return false;
             }
             // 竖
-            if (checkRepeat(board[0][i],
+            if (isRepeat(board[0][i],
                     board[1][i],
                     board[2][i],
                     board[3][i],
@@ -80,7 +80,7 @@ public class Solution0036 {
             // 正方
             int x = i / 3;
             int y = i % 3;
-            if (checkRepeat(board[x * 3][y * 3],
+            if (isRepeat(board[x * 3][y * 3],
                     board[x * 3][y * 3 + 1],
                     board[x * 3][y * 3 + 2],
                     board[x * 3 + 1][y * 3],
@@ -96,7 +96,7 @@ public class Solution0036 {
         return true;
     }
 
-    private static boolean checkRepeat(char... chars) {
+    private static boolean isRepeat(char... chars) {
         Set<Character> set = new HashSet<>();
         for (char c : chars) {
             if (c != '.' && !set.add(c)) {
