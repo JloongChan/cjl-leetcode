@@ -28,13 +28,13 @@ package com.cjl.leetcode;
  */
 public class Solution0037 {
 
-    public static void solveSudoku(char[][] board) {
+    public void solveSudoku(char[][] board) {
         // 第一次循环得到需要填充的个数及对应可能的值
         solve(board);
         return;
     }
 
-    private static boolean solve(char[][] board) {
+    private boolean solve(char[][] board) {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] == '.') {
@@ -57,7 +57,7 @@ public class Solution0037 {
         return true;
     }
 
-    private static boolean isPick(char[][] board, int row, int col, char c) {
+    private boolean isPick(char[][] board, int row, int col, char c) {
         for (int i = 0; i < board.length; i++) {
             // 校验行
             if (board[row][i] == c) {
@@ -75,19 +75,4 @@ public class Solution0037 {
         return true;
     }
 
-    public static void main(String[] args) {
-        char[][] board = new char[][]{
-                new char[]{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
-                new char[]{'6', '.', '.', '1', '9', '5', '.', '.', '.'},
-                new char[]{'.', '9', '8', '.', '.', '.', '.', '6', '.'},
-                new char[]{'8', '.', '.', '.', '6', '.', '.', '.', '3'},
-                new char[]{'4', '.', '.', '8', '.', '3', '.', '.', '1'},
-                new char[]{'7', '.', '.', '.', '2', '.', '.', '.', '6'},
-                new char[]{'.', '6', '.', '.', '.', '.', '2', '8', '.'},
-                new char[]{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
-                new char[]{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
-        };
-        solveSudoku(board);
-        System.out.println(board);
-    }
 }
