@@ -1,0 +1,89 @@
+package com.cjl.leetcode;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * 39. Combination Sum
+ * <p>
+ * Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
+ * <p>
+ * The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
+ * <p>
+ * It is guaranteed that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
+ * <p>
+ * <p>
+ * <p>
+ * Example 1:
+ * <p>
+ * Input: candidates = [2,3,6,7], target = 7
+ * Output: [[2,2,3],[7]]
+ * Explanation:
+ * 2 and 3 are candidates, and 2 + 2 + 3 = 7. Note that 2 can be used multiple times.
+ * 7 is a candidate, and 7 = 7.
+ * These are the only two combinations.
+ * Example 2:
+ * <p>
+ * Input: candidates = [2,3,5], target = 8
+ * Output: [[2,2,2,2],[2,3,3],[3,5]]
+ * Example 3:
+ * <p>
+ * Input: candidates = [2], target = 1
+ * Output: []
+ * Example 4:
+ * <p>
+ * Input: candidates = [1], target = 1
+ * Output: [[1]]
+ * Example 5:
+ * <p>
+ * Input: candidates = [1], target = 2
+ * Output: [[1,1]]
+ * <p>
+ * <p>
+ * Constraints:
+ * <p>
+ * 1 <= candidates.length <= 30
+ * 1 <= candidates[i] <= 200
+ * All elements of candidates are distinct.
+ * 1 <= target <= 500
+ *
+ * @author chenjinlong
+ * @date : 2020/12/28
+ */
+public class Solution0039 {
+
+    public static List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfs(candidates, target, 0, new ArrayList<>(), result);
+        return result.stream().distinct().collect(Collectors.toList());
+    }
+
+    /**
+     * 递归
+     *
+     * @param candidates 数组
+     * @param target     目标值
+     * @param startIndex 循环的起始下标
+     * @param pickList   已经取到值
+     * @param result     结果集
+     */
+    private static void dfs(int[] candidates, int target, int startIndex, List<Integer> pickList, List<List<Integer>> result) {
+        if (target < 0) {
+            return;
+        } else if (target == 0) {
+            result.add(pickList);
+            return;
+        }
+        int i = startIndex;
+        for (; i < candidates.length; i++) {
+            List<Integer> tempPickList = new ArrayList<>(pickList);
+            tempPickList.add(candidates[i]);
+            dfs(candidates, target - candidates[i], i, tempPickList, result);
+        }
+    }
+
+    public static void main(String[] args) {
+        combinationSum(new int[]{2, 3, 6, 7}, 7).forEach(System.out::println);
+    }
+}
