@@ -44,7 +44,7 @@ public class Solution0103 {
         if (result.size() == level) {
             result.add(new ArrayList<>());
         }
-        if (level % 2 == 1) {
+        if ((level & 1) == 1) {
             result.get(level).add(0, node.val);
         } else {
             result.get(level).add(node.val);
